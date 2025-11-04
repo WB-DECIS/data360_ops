@@ -408,9 +408,18 @@ def create_issues_for_dataset(
 		owner: str="worldbank",
 		repo: str="data360-pipelines-databricks"
 	) -> None | bool:
-	"""
+	"""Function to create GitHub issues for a dataset if it does not already exist.
+
+	This function is a wrapper that checks if a dataset ID already exists in the repo. If not, it creates the issues and sub-issues for the dataset.
+
 	Args:
+		dataset_id (str): Dataset identifier.
+		dataset_name (str): Dataset name.
+		token (str): Personal access token for GitHub API authentication.
+		owner (str): GitHub repository owner.
+		repo (str): GitHub repository name.
 	Returns:
+		None | bool: Returns True if issues were created, None if dataset ID already exists.
 	"""
 	print("Extracting the list of created datasets in the repo...")
 	existing_dataset_ids = extract_list_dataset_ids(

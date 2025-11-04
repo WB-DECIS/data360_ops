@@ -102,10 +102,11 @@ class TestExtractListDatasetIds:
 
     def test_extract_list_dataset_ids_no_issues(self, local_token):
         # Test behavior when there are no issues in the repo
-        dataset_ids = extract_list_dataset_ids(
-            token=local_token,
-            owner="WB-DECIS",
-            repo="empty_repo",
-            label="Dataset"
-        )
-        assert dataset_ids == set()
+        with pytest.raises(ValueError) as exc:
+            dataset_ids = extract_list_dataset_ids(
+                token=local_token,
+                owner="WB-DECIS",
+                repo="empty_repo",
+                label="Dataset"
+            )
+        assert str(exc.value).startswith("Failed to retrieve issues. Please check your token and repository are spelled correctly.")

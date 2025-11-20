@@ -128,151 +128,64 @@ def create_issues(
 			"labels": ["Dataset"]
 		},
 		{
-			"title": f"[{dataset_id}] - Collection module",
-			"labels": ["Collection", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Data curation",
-			"labels": ["Modeling", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Metadata elements creation",
-			"labels": ["Metadata elements", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Processing module",
-			"labels": ["Processing", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Pipeline integration",
-			"labels": ["Pip. integration", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Pipeline to prod",
-			"labels": ["Pip. to prod", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Referential metadata review",
-			"labels": ["Metadata review", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Data and metadata approval",
-			"labels": ["Meta-data approval", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Publication",
-			"labels": ["Publishing", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Maintainance",
-			"labels": ["Maintenance", "Epic"],
-		},
-		{
-			"title": f"[{dataset_id}] - Harvesting",
+			"title": f"[{dataset_id}] - Collection module - Developer",
 			"labels": ["Collection", "Task"],
-			"body": "- [ ] Implement/Document collection function (API, File)\n- [ ] Store raw data and data dictionary (list of indicators) in defined location (possibly DDH)\n- [ ] Share list of indicator details (data and metadata available) with Curator",
+			"body": "- [ ] Create Databricks Asset Bundle from template\n- [ ] Develop collection logic to harvest all data (notebook inside `inputs/working_file` folder)\n- [ ] Initial preprocess (long format)\n- [ ] Store raw data and data dictionary (list of indicators) in defined location (possibly DDH)\n- [ ] Share list of indicator details (data and metadata available) with Curator\n- [ ] Implement/Document collection function (API, File) in the `fetch_raw` notebook inside `pipeline_tasks` folder\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Data modelling",
+			"title": f"[{dataset_id}] - Data modeling - Curator",
 			"labels": ["Modeling", "Task"],
-			"body": "- [ ] Evaluation of the data to identify dimensionality, attributes and collapsing options.\n- [ ] Re-modeling design to comply with the established standards (DSDs, codelists, etc.)\n- [ ] Document finalized dimensions and items code(s) and name(s) in the template.",
+			"body": "- [ ] Evaluation of the data to identify dimensionality, attributes and collapsing options.\n- [ ] Re-modeling design to comply with the established standards (DSDs, codelists, etc.)\n- [ ] Document finalized dimensions and items code(s) and name(s) in the template.\n\nTo perform this task, create a copy of this template [00. MAPPING_TEMPLATE.xlsx](https://worldbankgroup.sharepoint.com/:x:/r/sites/EFIOSFiles/Shared%20Documents/WB-Corporate/Data-Bank/Data360/DEC/Data%20Management/Mappings/00.%20MAPPING_TEMPLATE.xlsx?d=wa884911aa56c49a2886db6d4f8bf5735&csf=1&web=1&e=09ojHO&xsdata=MDV8MDJ8fGE5YTJkODRkZTE3MzRhYmZjMzM2MDhkZTI3YTg1NWJlfDMxYTJmZWMwMjY2YjRjNjdiNTZlMjc5NmQ4ZjU5YzM2fDB8MHw2Mzg5OTE4MDEwNzk3NDgxODF8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2pVME5HWmtaRGt3WVRZME9UUTFZMk5pTldOaVpHTXdOek14TlRreVlqbGxRSFJvY21WaFpDNTJNaTl0WlhOellXZGxjeTh4TnpZek5UZ3lNRGszTURVMXw3OGNkM2ZiNDliYWU0ZTMzMjYzYTA4ZGUyN2E4NTViZXw0MDk3NDg2NWNkMDM0ODc0YThlNGVmMDk2MGY5ODAyOA%3D%3D&sdata=Z3FzaUk1LzBrQWtkNGpwWXVWbjB5SWhwcDd1OUpreHkvdVpvOWFOM3dhbz0%3D&ovuser=31a2fec0-266b-4c67-b56e-2796d8f59c36%2Cdgilsanchez%40worldbank.org), complete the modeling documentation and deposit the new file in this [location](https://worldbankgroup.sharepoint.com/sites/EFIOSFiles/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FEFIOSFiles%2FShared%20Documents%2FWB%2DCorporate%2FData%2DBank%2FData360%2FDEC%2FData%20Management%2FMappings&xsdata=MDV8MDJ8fGE5YTJkODRkZTE3MzRhYmZjMzM2MDhkZTI3YTg1NWJlfDMxYTJmZWMwMjY2YjRjNjdiNTZlMjc5NmQ4ZjU5YzM2fDB8MHw2Mzg5OTE4MDEwNzk3NzMzMjl8VW5rbm93bnxWR1ZoYlhOVFpXTjFjbWwwZVZObGNuWnBZMlY4ZXlKRFFTSTZJbFJsWVcxelgwRlVVRk5sY25acFkyVmZVMUJQVEU5R0lpd2lWaUk2SWpBdU1DNHdNREF3SWl3aVVDSTZJbGRwYmpNeUlpd2lRVTRpT2lKUGRHaGxjaUlzSWxkVUlqb3hNWDA9fDF8TDJOb1lYUnpMekU1T2pVME5HWmtaRGt3WVRZME9UUTFZMk5pTldOaVpHTXdOek14TlRreVlqbGxRSFJvY21WaFpDNTJNaTl0WlhOellXZGxjeTh4TnpZek5UZ3lNRGszTURVMXw3OGNkM2ZiNDliYWU0ZTMzMjYzYTA4ZGUyN2E4NTViZXw0MDk3NDg2NWNkMDM0ODc0YThlNGVmMDk2MGY5ODAyOA%3D%3D&sdata=NjdxYUQ0bW02aUVhdUpCbjdMVzNGeTF5U1lhcitEMGE2Sjg0cUVndGNUOD0%3D&ovuser=31a2fec0-266b-4c67-b56e-2796d8f59c36%2Cdgilsanchez%40worldbank.org) \n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["lcorsof"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Structural metadata: Process artifacts in FMR",
+			"title": f"[{dataset_id}] - Metadata elements creation - Curator",
 			"labels": ["Metadata elements", "Task"],
-			"body": "- [ ] Process (update/upload) artifacts in FMR",
+			"body": "- [ ] Structural metadata: Update/upload artifacts in FMR\n- [ ] Referential metadata: Create indicator and dataset projects in metadata editor\n- [ ] Send notification to data owners that all projects have been created in the Metadata Editor\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["lcorsof"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Referencial metadata: Create projects in metadata editor",
-			"labels": ["Metadata elements", "Task"],
-			"body": "- [ ] Create indicator and dataset metadata projects in Metadata Editor",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Send notification to data owners",
-			"labels": ["Metadata elements", "Task"],
-			"body": "- [ ] Send notification to data owners that all projects have been created in the Metadata Editor",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Implement specifications for transformations (collapsing and new columns)",
+			"title": f"[{dataset_id}] - Processing module - Developer",
 			"labels": ["Processing", "Task"],
+			"body": "- [ ] In the `transform_to_sdmx` notebook:\n    - [ ] Implement specifications for transformations (collapsing and new columns)\n    - [ ] Store processed data (Silver)\n- [ ] In the `validate_against_dsd` notebook:\n    - [ ] Structural validation \n    - [ ] Store processed data (Gold)\n- [ ] Create new notebook for aggregates (optional)\n    - [ ] Document how aggregation is going to be calculated (methodology, weights, etc)\n    - [ ] Calculation of aggregation based on needs\n- [ ] Content validation (optional)\n    - [ ] Implement hard check validation\n    - [ ] Create report about (hard check) validation\n    - [ ] Implement automatic (code) tests and log results\n- [ ] Test processing system (In QA) and create PR\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Implement/Document aggregation processing",
-			"labels": ["Processing", "Task"],
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Store processed data (Silver)",
-			"labels": ["Processing", "Task"],
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Structural validation",
-			"labels": ["Processing", "Task"],
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Store processed data (Gold)",
-			"labels": ["Processing", "Task"],
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Content validation",
-			"labels": ["Processing", "Task"],
-			"body": "- [ ] Implement hard check validation\n- [ ] Create report about (hard check) validation\n- [ ] Implement automatic (code) tests and log results",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Test processing system",
-			"labels": ["Processing", "Task"],
-			"body": "- [ ] Test processing system.\n- [ ] Create PR to main.",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - PR Review: Testing custom tasks until validation",
-			"labels": ["Pip. integration", "Task"],
-			"body": "- [ ] PR review: Testing custom tasks until validation (locally).",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Enable publish pipeline",
-			"labels": ["Pip. integration", "Task"],
-			"body": "- [ ] Apply instruments to ensure ingestion of finalized data into dissemination environment.\n- [ ] Prepopulate referencial metadata from mapping file to ME.\n- [ ] Create Indicators CSV files.\n- [ ] Create Download CSV files.\n- [ ] Export JSON and PDF metadata files.\n- [ ] Verify exported files.\n- [ ] Trigger publishing.",
-			"type": "Task",
-		},
-		{
-			"title": f"[{dataset_id}] - Move pipeline to production",
+			"title": f"[{dataset_id}] - Pipeline to prod - Lead/Operations",
 			"labels": ["Pip. to prod", "Task"],
-			"body": "- [ ] Push pipeline to prod in Databricks.\n- [ ] Initial pipeline execution to push data into PROD.",
+			"body": "- [ ] PR Review: Testing custom tasks until validation.\n- [ ] Enable `publish_pipeline`\n- [ ] Merge pipeline branch to `main` branch\n- [ ] Push Asset Bundle to Databricks Prod\n- [ ] Run pipeline manually and push data to QA/Staging\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["gauravcusp"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Metadata review",
+			"title": f"[{dataset_id}] - Referential Metadata review - Metadata manager",
 			"labels": ["Metadata review", "Task"],
-			"body": "- [ ] Ensure referential metadata is ingested\n- [ ] Request to FP or DR to gather their inputs on missing fields or improvement in ME projects\n- [ ] Apply or request to FP or DR to assign tags to indicators.",
+			"body": "- [ ] Ensure referential metadata is ingested\n- [ ] Request to Focal Point or Data Requestor to gather their inputs on missing fields or improvement in ME projects\n- [ ] Apply or request to Focal Point or Data Requestor to assign tags to indicators.\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["cmachingauta"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Data and metadata approval",
+			"title": f"[{dataset_id}] - Data and Metadata Approval - Curator",
 			"labels": ["Meta-data approval", "Task"],
-			"body": "- [ ] Request for approval from DR or FP\n- [ ] Document response in GitHub\n- [ ] Data AND metadata approved?",
+			"body": "- [ ] Request for approval from Data Requestor or Focal Point\n- [ ] Document response in GitHub\n- [ ] Data AND metadata approved?\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["lcorsof"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Move to Production",
-			"labels": ["Publishing", "Task"],
-			"body": "- [ ] Evaluate embargo and apply it.\n- [ ] Trigger change from staging to prod.\n- [ ] Schedule pipeline",
+			"title": f"[{dataset_id}] - Schedule pipeline - Lead/Operations",
+			"labels": ["Ops", "Task"],
+			"body": "In this task everything should be in production: Datalake, Databricks prod, Front-end prod, etc.\n\n- [ ] Evaluate embargo and apply it.\n- [ ] Trigger change from staging to prod.\n- [ ] Schedule pipeline\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["gauravcusp"],
 			"type": "Task",
 		},
 		{
-			"title": f"[{dataset_id}] - Add pipeline to monitoring tool",
+			"title": f"[{dataset_id}] - Maintenance - Lead/Operations",
 			"labels": ["Maintenance", "Task"],
+			"body": "Create subissues every time there's something wrong with the pipeline. Tag them as \"Subtask\" and \"Maintenance\"\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"assignees": ["gauravcusp"],
 			"type": "Task",
 		},
 	]
@@ -330,7 +243,7 @@ def add_subissues(
 
 	# Create subsets by tasks, epics and datasets labels
 	datasets = [issue for issue in created_issues if "Dataset" in issue["labels"]]
-	epics = [issue for issue in created_issues if "Epic" in issue["labels"]]
+	# epics = [issue for issue in created_issues if "Epic" in issue["labels"]]
 	tasks = [issue for issue in created_issues if "Task" in issue["labels"]]
 
 	# Extract dataset issue number
@@ -339,16 +252,15 @@ def add_subissues(
 	# GitHub API endpoint to add subissues to specified issue
 	url = f"https://api.github.com/repos/{owner}/{repo}/issues/{dataset_issue_number}/sub_issues"
 
-	# Assign epics as sub-issues to dataset
-	for epic in epics:
-		print(f'Adding epic {epic["title"]} to dataset issue #{dataset_issue_number}')
-		epic_issue_id = epic["id"]
+	# Assign tasks as sub-issues to dataset
+	for task in tasks:
+		print(f'Adding task {task["title"]} to dataset issue #{dataset_issue_number}')
+		task_issue_id = task["id"]
 		# params
 		create_params = {
-			"sub_issue_id": epic_issue_id,
+			"sub_issue_id": task_issue_id,
 			"replace_parent": False,
 		}
-
 		# Make the request
 		response = requests.post(url, headers=headers, json=create_params)
 
@@ -360,43 +272,7 @@ def add_subissues(
 			print(f"Could not add issue: {response.status_code}")
 			print(response.text)
 		time.sleep(0.1)
-	# End for loop through epics
-
-	# Assign tasks as sub-issues to epics
-	for epic in epics:
-		# Extract issue number and primary label
-		issue_number = epic["number"]
-		label = [label for label in epic["labels"] if label != "Epic"][0]
-		
-		# Filter tasks that match the epic's primary label
-		tasks_for_epic = [task for task in tasks if label in task["labels"]]
-
-		# Update url for each epic
-		url = f"https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/sub_issues"
-		
-		# Loop through tasks and assign to epic
-		for task in tasks_for_epic:
-			print(f'Adding epic {task["title"]} to epic issue #{issue_number} - label: {label}')
-			task_issue_id = task["id"]
-			# params
-			create_params = {
-				"sub_issue_id": task_issue_id,
-				"replace_parent": False,
-			}
-
-			# Make the request
-			response = requests.post(url, headers=headers, json=create_params)
-
-			# Check the response
-			if response.status_code in [200, 201]:
-				print("Subissue added successfully!")
-				# print(response.json())
-			else:
-				print(f"Could not add issue: {response.status_code}")
-				print(response.text)
-			time.sleep(0.1)
-		# End for loop through tasks
-	# End for loop through epics
+	# End for loop through tasks
 
 	return True
 

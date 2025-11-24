@@ -156,14 +156,14 @@ def create_issues(
 		{
 			"title": f"[{dataset_id}] - Pipeline to prod - Lead/Operations",
 			"labels": ["Pip. to prod", "Task"],
-			"body": "- [ ] PR Review: Testing custom tasks until validation.\n- [ ] Enable `publish_pipeline`\n- [ ] Merge pipeline branch to `main` branch\n- [ ] Push Asset Bundle to Databricks Prod\n- [ ] Run pipeline manually and push data to QA/Staging\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"body": "- [ ] PR Review: Testing custom tasks until validation.\n- [ ] Enable `publish_pipeline`\n- [ ] Merge pipeline branch to `main` branch\n- [ ] Push Asset Bundle to Databricks Prod\n- [ ] Change FMR_ENV to \"prod\" in the job parameters section\n- [ ] Run pipeline manually and push data to QA/Staging\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
 			"assignees": ["gauravcusp"],
 			"type": "Task",
 		},
 		{
 			"title": f"[{dataset_id}] - Referential Metadata review - Metadata manager",
 			"labels": ["Metadata review", "Task"],
-			"body": "- [ ] Ensure referential metadata is ingested\n- [ ] Request to Focal Point or Data Requestor to gather their inputs on missing fields or improvement in ME projects\n- [ ] Apply or request to Focal Point or Data Requestor to assign tags to indicators.\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
+			"body": "- [ ] Ensure referential metadata is ingested\n- [ ] Request to Focal Point or Data Requestor to gather their inputs on missing fields or improvement in ME projects\n- [ ] Apply or request to Focal Point or Data Requestor to assign tags to indicators.\n\nTo perform this task you may need some information from the data request, you can find it [here](https://worldbankgroup-my.sharepoint.com/:x:/g/personal/pmuthukumar1_worldbank_org/IQC5gJ59b_NGRayvneKMJ_KSARG7PBvx513sWDB5gQ37uuA?email=cmachingauta%40worldbank.org&e=0iCdsl) (you should have access, if not ask Lorena for it).\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
 			"assignees": ["cmachingauta"],
 			"type": "Task",
 		},

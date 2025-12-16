@@ -148,3 +148,6 @@ dmypy.json
 *.token
 *.creds
 *.secret
+
+# Local system parameters
+systems_params.yml

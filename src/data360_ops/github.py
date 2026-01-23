@@ -277,6 +277,70 @@ def add_subissues(
 	return True
 
 
+def add_dependencies(
+		created_issues: list,
+		token: str, 
+		owner: str, 
+		repo: str
+	):
+	"""Function to add dependencies to created issues in a GitHub repo.
+
+	This function add dependencies between issues.
+	
+	Args:
+		created_issues (list): List of created issues with their details.
+		token (str): Personal access token for GitHub API authentication.
+		owner (str): GitHub repository owner.
+		repo (str): GitHub repository name.
+	Returns:
+		Bool: True if dependencies were added successfully, False otherwise.
+	"""
+	# Define order for dependencies
+	# First element of the list won't have any dependencies
+	tags = ['Modeling', 'Metadata elements', 'Processing', 'Pip. to prod', 
+		 'Metadata review', 'Meta-data approval', 'Ops', 'Maintenance']
+
+	# Set up headers with the token
+	headers = {
+		"Authorization": f"Bearer {token}",
+		"Accept": "application/vnd.github+json",
+	}
+
+	# Create subsets by tasks, epics and datasets labels
+	datasets = [issue for issue in created_issues if "Dataset" in issue["labels"]]
+	# epics = [issue for issue in created_issues if "Epic" in issue["labels"]]
+	tasks = [issue for issue in created_issues if "Task" in issue["labels"]]
+
+	for i in range(len(tags)):
+		tag = tags[i]
+		if tag == 'Modeling':
+			continue
+		else:
+			previous_tag = tags[i - 1]
+			# Extract issue number based on tag and then the number
+			issue_number = [i for i in tasks if tag in i['labels']][0]['number']
+			# Extract previous issue id based on tag
+			previous_issue_id = [i for i in tasks if previous_tag in i['labels']][0]['id']
+			dependency_url = f"https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by"
+			params = {
+				"issue_id": previous_issue_id
+			}
+			# Make the request
+			response = requests.post(dependency_url, headers=headers, json=params)
+
+			# Check the response
+			if response.status_code in [200, 201]:
+				print(f"{tag}: 'Blocked by' dependency added successfully!")
+				# print(response.json())
+			else:
+				print(f"Could not add dependency: {response.status_code}")
+				print(response.text)
+			time.sleep(0.1)
+		# End if
+	# End for loop
+	return True
+
+
 def create_issues_for_dataset(
 		dataset_id: str,
 		dataset_name: str,
@@ -319,6 +383,14 @@ def create_issues_for_dataset(
 
 		# Add subissues
 		added = add_subissues(
+			created_issues=issues,
+			token=token,
+			owner=owner,
+			repo=repo
+		)
+
+		# Add dependencies
+		dependencies = add_dependencies(
 			created_issues=issues,
 			token=token,
 			owner=owner,

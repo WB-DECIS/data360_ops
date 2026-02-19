@@ -6,6 +6,7 @@ from .one_drive import (
     download_file,
     list_files
 )
+from .metadata_editor import get_projects_from_collection
 
 __version__ = version("data360_ops")
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "load_token",
     "get_token_with_username",
     "download_file",
-    "list_files"
+    "list_files",
+    "get_projects_from_collection"
 ]

@@ -157,7 +157,7 @@ def create_issues(
 			"title": f"[{dataset_id}] - Pipeline to prod - Lead/Operations",
 			"labels": ["Pip. to prod", "Task"],
 			"body": "- [ ] PR Review: Testing custom tasks until validation.\n- [ ] Enable `publish_pipeline`\n- [ ] Merge pipeline branch to `main` branch\n- [ ] Push Asset Bundle to Databricks Prod\n- [ ] Change FMR_ENV to \"prod\" in the job parameters section\n- [ ] Run pipeline manually and push data to QA/Staging\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
-			"assignees": ["gauravcusp"],
+			"assignees": ["danielgils"],
 			"type": "Task",
 		},
 		{
@@ -178,14 +178,14 @@ def create_issues(
 			"title": f"[{dataset_id}] - Schedule pipeline - Lead/Operations",
 			"labels": ["Ops", "Task"],
 			"body": "In this task everything should be in production: Datalake, Databricks prod, Front-end prod, etc.\n\n- [ ] Evaluate embargo and apply it.\n- [ ] Trigger change from staging to prod.\n- [ ] Schedule pipeline\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
-			"assignees": ["gauravcusp"],
+			"assignees": ["danielgils"],
 			"type": "Task",
 		},
 		{
 			"title": f"[{dataset_id}] - Maintenance - Lead/Operations",
 			"labels": ["Maintenance", "Task"],
 			"body": "Create subissues every time there's something wrong with the pipeline. Tag them as \"Subtask\" and \"Maintenance\"\n\n**Note: When adding comments, please add as a title the item that you are referring to. Example:**\n```\n# [Item title]\n\n[Your comment, e.g., This was done locally and ...]\n```\n",
-			"assignees": ["gauravcusp"],
+			"assignees": ["danielgils"],
 			"type": "Task",
 		},
 	]

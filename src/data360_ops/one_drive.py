@@ -4,35 +4,35 @@ import requests
 def get_token_with_username(
 		authority_url: str, 
 		resource_url: str, 
-        scope: str,
+		scope: str,
 		client_id: str,
 		tenant_id: str,
 		username: str,
 		password: str
 	) -> dict:
-    """Gets token after authentication to Azure Active Directory (ADD) using MSAL
+	"""Gets token after authentication to Azure Active Directory (ADD) using MSAL
 
-    Args:
-        authority_url (str): string with the url to authenticate
-        resource_url (str): graph api url
-        scope (str): scope
+	Args:
+		authority_url (str): string with the url to authenticate
+		resource_url (str): graph api url
+		scope (str): scope
 		client_id (str): client id of the application
 		tenant_id (str): tenant id of the application
 		username (str): username for authentication
 		password (str): password for authentication
-    Returns:
-        Dictionary with authentication tokens and other relevant information
-    """
-    app = msal.PublicClientApplication(
-        client_id=client_id, 
-        authority=f"{authority_url}{tenant_id}")
-    
-    token = app.acquire_token_by_username_password(
-        username=username, 
+	Returns:
+		Dictionary with authentication tokens and other relevant information
+	"""
+	app = msal.PublicClientApplication(
+		client_id=client_id, 
+		authority=f"{authority_url}{tenant_id}")
+	
+	token = app.acquire_token_by_username_password(
+		username=username, 
 		password=password,        
-        scopes=[f"{resource_url}{scope}"])
+		scopes=[f"{resource_url}{scope}"])
 
-    return token
+	return token
 
 
 def download_file(
@@ -71,25 +71,44 @@ def download_file(
 			f"users/{site_user_id}/drive/root:/{file_path}:/content"
 		)
 	else:
-		# This options is for Team drive such as 'efiosfiles'
+		# This options is for Team drive such as 'efiosfiles' or 'ddh2'
 
 		# Throw error if host_name is not provided
 		if host_name is None:
 			raise ValueError("host_name must be provided for shared drives.")
 		
-		# Get ID of the drive
-		site = requests.get(
-			f"{resource_url}{api_version}/sites/{host_name}:/sites/{site_user_id}:/drive",
-			headers=headers
-		).json()
+		try: 
+			# Get ID of the drive
+			site = requests.get(
+				f"{resource_url}{api_version}/sites/{host_name}:/sites/{site_user_id}:/drive",
+				headers=headers
+			).json()
 
-		drive_id = site['id']
+			drive_id = site['id']
 
-		# Download file
-		download_url = (
-			f"{resource_url}{api_version}/"
-			f"drives/{drive_id}/root:/{file_path}:/content"
-		)
+			# Download file
+			download_url = (
+				f"{resource_url}{api_version}/"
+				f"drives/{drive_id}/root:/{file_path}:/content"
+			)
+		except Exception as e:
+			try:
+				# Get ID of the drive
+				site = requests.get(
+					f"{resource_url}{api_version}/sites/{host_name}:/teams/{site_user_id}:/drive",
+					headers=headers
+				).json()
+				
+				drive_id = site['id']
+					
+				# Download file
+				download_url = (
+					f"{resource_url}{api_version}/"
+					f"drives/{drive_id}/root:/{file_path}:/content"
+				)
+			except Exception as e_inner:
+				raise ValueError(f"Error retrieving drive ID: {e_inner}")
+		
 	# End if
 
 	# Download the file
@@ -110,7 +129,7 @@ def download_file(
 
 
 def list_files(
-        resource_url: str,
+		resource_url: str,
 		api_version: str,
 		site_user_id: str,
 		folder_path: str,

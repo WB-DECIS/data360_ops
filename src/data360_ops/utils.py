@@ -27,7 +27,9 @@ def normalize_indicator_input(raw_value):
 # Extract value from a key in a dictionary 
 def extract_value_from_key(dictionary, key='database_id'):
     """
-    Extracts the value associated with a given key from a dictionary. This is useful for lambda functions where we want to extract specific values from dictionaries in a DataFrame column.
+    Extracts the value associated with a given key from a dictionary. 
+    This is useful for lambda functions where we want to extract specific values
+    from dictionaries in a DataFrame column.
 
     Args:
         dictionary (dict): The dictionary to extract the value from.

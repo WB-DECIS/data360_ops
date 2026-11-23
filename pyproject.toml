@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data360_ops"
-version = "0.2.5"
+version = "0.2.6"
 description = "A package to support the operation of Data360"
 authors = ["Daniel Gil-Sanchez"]
 license = "MIT"
@@ -11,7 +11,7 @@ python = "^3.12"
 requests = "^2.32.5"
 msal = "^1.34.0"
 pyyaml = "^6.0.3"
-pymetadataeditor = "^0.3.2"
+pymetadataeditor = "^0.5.1"
 
 [tool.semantic_release]
 version_toml = [

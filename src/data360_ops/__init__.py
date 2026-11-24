@@ -17,7 +17,9 @@ from .metadata_editor import (
     create_collection,
     grant_admin_access,
     add_projects_to_collection,
-    move_collection_to_another_collection
+    move_collection_to_another_collection,
+    get_meta_by_dataset_db,
+    get_meta_by_dataset_db_across_collections
 )
 
 from .utils import load_global_yaml_config
@@ -40,5 +42,7 @@ __all__ = [
     "grant_admin_access",
     "add_projects_to_collection",
     "move_collection_to_another_collection",
-    "load_global_yaml_config"
+    "load_global_yaml_config",
+    "get_meta_by_dataset_db",
+    "get_meta_by_dataset_db_across_collections"
 ]

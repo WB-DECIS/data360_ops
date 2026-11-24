@@ -535,3 +535,119 @@ def move_collection_to_another_collection(
 		print(f"Collection {dataset_collection_id} already linked to draft collection {draft_collection_num} — skipping.")
 	else:
 		resp.raise_for_status()
+
+
+def get_meta_by_dataset_db(meta_url, dataset_id, api_key, type, collection_num):
+	"""
+	Extract Data360 metadata projects belonging to a dataset.
+
+	:param meta_url: Base URL of metadata API
+	:param dataset_id: Dataset identifier
+	:param api_key: API key
+	:param type: "timeseries" or "timeseries-db"
+	:return: DataFrame of metadata projects
+	"""
+	limit = 1000  # Max limit per page
+	headers = {"x-api-key": api_key}
+
+	request_url = f"{meta_url}/api/editor?collection={collection_num}&type={type}&limit={limit}&offset=0"
+	response = requests.get(request_url, headers=headers)
+	result = response.json()
+
+	if response.status_code != 200:
+		raise RuntimeError(f"Metadata request failed: {response.text}")
+
+	total_cases = result.get("total", 0)
+	exist_id = {}
+
+	for i in range(0, total_cases, limit):
+		paginated_url = f"{meta_url}/api/editor?collection={collection_num}&type={type}&limit={limit}&offset={i}"
+		paginated_response = requests.get(paginated_url, headers=headers)
+		paginated_result = paginated_response.json()
+		projects = paginated_result.get("projects", [])
+
+		if type == "timeseries":
+			for item in projects:
+				if not isinstance(item, dict):
+					continue
+
+				attrs = item.get("attributes")
+				if not isinstance(attrs, dict):
+					continue    
+
+				if attrs.get("database_id") == dataset_id.upper():
+					exist_id[item["study_idno"]] = item["id"]
+					# log.info("Found existing metadata project for indicator %s", item["id"])
+					print(f"Found existing metadata project for indicator {item['id']} in collection {collection_num}")
+
+		elif type == "timeseries-db":
+			for item in projects:
+				if not isinstance(item, dict):
+					continue
+
+				if item.get("study_idno") == dataset_id:
+					exist_id[item["study_idno"]] = item["id"]
+					# log.info("Found existing metadata project for dataset %s", dataset_id)
+					print(f"Found existing metadata project for dataset {dataset_id} in collection {collection_num}")
+
+	if not exist_id:
+		raise Exception("No existing Data360 metadata projects found! Check your Metadata Editor account role.")
+	else:
+		# log.info("Existing Data360 metadata projects found (%d total)", len(exist_id))
+		print(f"Existing Data360 metadata projects found ({len(exist_id)} total)")
+		meta_id = (
+			pd.DataFrame.from_dict(exist_id, orient="index", columns=["idno"])
+			.reset_index()
+		)
+		return meta_id
+
+	
+def get_meta_by_dataset_db_across_collections(
+		dataset_id, api_key, type, collection_nums, 
+		meta_url: str='https://metadataeditor.worldbank.org/index.php'
+	):
+	"""
+	Like get_meta_by_dataset_db, but merges results across multiple collections and
+	tolerates a collection where this dataset has nothing (get_meta_by_dataset_db raises
+	per-collection when nothing is found there — expected when a project is filed in
+	exactly one of draft/prod, not both). Raises only if the dataset is found in none of
+	the given collections.
+	"""
+	frames = []
+	print("")
+	for collection_num in collection_nums:
+		try:
+			frames.append(get_meta_by_dataset_db(meta_url, dataset_id, api_key, type, collection_num))
+		except Exception as e:
+			# log.info("No %s projects for %s in collection %s (%s)", type, dataset_id, collection_num, e)
+			print(f"No {type} projects for {dataset_id} in collection {collection_num}: Error ({e})")
+	if not frames:
+		raise RuntimeError(
+			f"No {type} projects found for dataset '{dataset_id}' in any of collections {collection_nums}."
+		)
+	return pd.concat(frames, ignore_index=True).drop_duplicates(subset="idno").reset_index(drop=True)
+
+
+def update_patch(
+		md, key, idno, project_type = "timeseries",
+		meta_url: str='https://metadataeditor.worldbank.org/index.php'
+	):
+    """
+    Function uses to update a project through patch in the metadata editor
+    :param md: metadata in json format
+    :param key: api key
+    :param idno: idno of the project
+    :param partial_update: boolean value to update the metadata
+    :return: response of the update
+    """
+    metadata_json = md
+    request_url = f"{meta_url}/api/editor/patch/{project_type}/{idno}?id_format=idno"
+    headers = {"x-api-key": key, "Content-Type": "application/json"}
+    response = requests.request(
+        "POST", request_url, headers=headers, data=metadata_json
+    )
+    if response.status_code != 200:
+        # log.warning("update_patch %s returned %s: %s", idno, response.status_code, response.text)
+        print(f"update_patch {idno} returned {response.status_code}: {response.text}")
+    r = response.text
+    return r

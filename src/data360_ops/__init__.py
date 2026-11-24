@@ -19,7 +19,8 @@ from .metadata_editor import (
     add_projects_to_collection,
     move_collection_to_another_collection,
     get_meta_by_dataset_db,
-    get_meta_by_dataset_db_across_collections
+    get_meta_by_dataset_db_across_collections,
+    update_patch
 )
 
 from .utils import load_global_yaml_config
@@ -44,5 +45,6 @@ __all__ = [
     "move_collection_to_another_collection",
     "load_global_yaml_config",
     "get_meta_by_dataset_db",
-    "get_meta_by_dataset_db_across_collections"
+    "get_meta_by_dataset_db_across_collections",
+    "update_patch"
 ]
